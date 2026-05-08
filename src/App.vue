@@ -1,31 +1,32 @@
 <template>
-    <h1>
-        {{ userStore.name }}
-    </h1>
-    <h2>{{ userStore.age }}</h2>
-    <button @click="userStore.addAge">增加年龄</button>
-    <button @click="userStore.changeName('大爱仙尊')">修改名字</button>
-    <button @click="getData">获取数sadaadadad据</button>
+    <el-button type="primary">点击我</el-button>
+    <el-input v-model="input" placeholder="请输入内容" />
+    <el-form :model="form">
+  <el-form-item label="用户名">
+    <el-input v-model="form.name" />
+  </el-form-item>
 
-</template> 
+  <el-form-item label="密码">
+    <el-input v-model="form.password" />
+  </el-form-item>
+
+  <el-button type="primary" @click="submit">
+    提交
+  </el-button>
+</el-form>
+<el-dialog v-model="visible"></el-dialog>
+</template>
 
 <script setup lang="ts">
-import {useUserStore} from "./stores/user"
-import {ref} from "vue"
-import axios from "axios"
-import {onMounted} from "vue"
-const userStore = useUserStore()
-const userList=ref<any[]>([])
-async function getData(){
-    const res=await axios({
-        url:"https://jsonplaceholder.typicode.com/users",
-        method:"get"
+import { ref } from 'vue'
 
-    })
-    userList.value=res.data
-}
-onMounted(()=>{
-    getData()
+const input = ref('')
+const form = ref({
+  name: '',
+  password: ''
 })
 
+function submit() {
+  console.log(form.value)
+}
 </script>

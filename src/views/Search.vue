@@ -4,5 +4,10 @@
 </template>
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+
+defineOptions({
+  name: 'SearchView',
+})
+
 const route=useRoute()
 </script>
