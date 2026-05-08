@@ -5,7 +5,7 @@
     <h2>{{ userStore.age }}</h2>
     <button @click="userStore.addAge">增加年龄</button>
     <button @click="userStore.changeName('大爱仙尊')">修改名字</button>
-    <button @click="getData">获取数据</button>
+    <button @click="getData">获取数sadaadadad据</button>
 
 </template> 
 
