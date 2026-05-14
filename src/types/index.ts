@@ -52,3 +52,19 @@ export interface MetricDatum {
 
 export type RefreshRate = 500 | 1000 | 2000 | 5000
 export type WindowSize = 30 | 60 | 120
+
+const VALID_REFRESH_RATES: readonly number[] = [500, 1000, 2000, 5000]
+const VALID_WINDOW_SIZES: readonly number[] = [30, 60, 120]
+
+export function isRefreshRate(v: number): v is RefreshRate {
+  return VALID_REFRESH_RATES.includes(v)
+}
+
+export function isWindowSize(v: number): v is WindowSize {
+  return VALID_WINDOW_SIZES.includes(v)
+}
+
+export function humanizeRate(ms: RefreshRate): string {
+  if (ms >= 1000) return (ms / 1000) + '秒'
+  return ms + '毫秒'
+}
