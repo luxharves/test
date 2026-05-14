@@ -1,0 +1,152 @@
+/* === Pixel-Pulse Global Design Tokens === */
+
+:root {
+  /* ---- 底色 ---- */
+  --bg-deep: #060d17;
+  --bg-elevated: #0b1521;
+  --bg-hover: #0f1b2b;
+
+  /* ---- 面板 & 边框 ---- */
+  --panel-bg: rgba(255, 255, 255, 0.03);
+  --panel-border: rgba(255, 255, 255, 0.07);
+  --panel-hover: rgba(255, 255, 255, 0.06);
+
+  /* ---- 文字 ---- */
+  --text-primary: rgba(255, 255, 255, 0.90);
+  --text-secondary: rgba(255, 255, 255, 0.58);
+  --text-muted: rgba(255, 255, 255, 0.35);
+
+  /* ---- 语义色 ---- */
+  --accent: #4fd1ff;
+  --accent-soft: rgba(79, 209, 255, 0.16);
+  --success: #5df2a7;
+  --warning: #f5b041;
+  --danger: #ff6b6b;
+
+  /* ---- 图表专用 ---- */
+  --chart-cpu: #4fd1ff;
+  --chart-memory: #a78bfa;
+  --chart-upload: #4fd1ff;
+  --chart-download: rgba(79, 209, 255, 0.35);
+  --chart-danger: #ff6b6b;
+  --chart-grid: rgba(255, 255, 255, 0.06);
+}
+
+/* === Reset === */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
+}
+
+/* === Monitor Card (shared) === */
+.monitor-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 20px 22px;
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.monitor-card:hover {
+  transform: translateY(-1px);
+  background: var(--panel-hover);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* === Hero Card (main chart area, only one with extra blur) === */
+.card-hero {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.02)
+  );
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .card-hero {
+    background: rgba(11, 21, 33, 0.95);
+  }
+}
+
+/* === Animations === */
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+@keyframes alert-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(255, 107, 107, 0); }
+}
+
+@keyframes feed-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.metric-card-enter {
+  animation: card-enter 0.5s ease both;
+}
+
+.card-alert {
+  animation: alert-pulse 1s ease 3;
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
